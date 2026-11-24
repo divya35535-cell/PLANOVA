@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Manage an event checklist, track tasks, and estimate your event expenses.">
+  <title>Planova — Event Organizer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="#"><span class="brand-mark">✦</span> Planova</a>
+      <span class="status"><i></i> YOUR PERSONAL WORKSPACE</span>
+    </header>
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">DASHBOARD / OVERVIEW</p>
+          <h1>Planova — Event Organizer</h1>
+          <p class="tagline">Good events start with a clear plan.</p>
+          <p class="description">Manage an event checklist, track tasks, and estimate your event expenses.</p>
+          <a class="primary-link" href="#workspace">Explore dashboard <span>↘</span></a>
+        </div>
+        <div class="hero-art" aria-label="Decorative abstract illustration">
+          <div class="orb orb-one"></div><div class="orb orb-two"></div>
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+          <div class="art-label">MAKE<br>IT COUNT<span>✦</span></div>
+        </div>
+      </section>
+      <section class="stats" aria-label="Overview statistics">
+        <div class="stat"><div class="stat-label">Tasks</div><div class="stat-value">8</div></div>
+        <div class="stat"><div class="stat-label">Completed</div><div class="stat-value">5</div></div>
+        <div class="stat"><div class="stat-label">Budget</div><div class="stat-value">₹12,000</div></div>
+      </section>
+      
+<section class="event-manager">
+  <div class="event-manager-heading">
+    <div>
+      <p class="eyebrow">WORKSPACE CONTROL</p>
+      <h2>My Events</h2>
+    </div>
+    <span class="event-badge">MULTI-EVENT MODE</span>
+  </div>
+
+  <form id="eventForm" class="event-form">
+    
+<input
+  type="date"
+  id="eventDate"
+  required
+  aria-label="Event date"
+>
+
+
+    <select id="eventType">
+      <option value="Birthday">Birthday</option>
+      <option value="College Fest">College Fest</option>
+      <option value="Wedding">Wedding</option>
+      <option value="Farewell">Farewell</option>
+      <option value="Corporate">Corporate</option>
+      <option value="Other">Other</option>
+    
+<!-- GUEST MANAGEMENT -->
+
+<section class="guest-manager">
+
+  <div class="guest-heading">
+    <div>
+      <p class="eyebrow">ATTENDEE MANAGEMENT</p>
+      <h2>Guest Management</h2>
+      <p>Manage invitations and track your event attendees.</p>
+    </div>
+    <span class="event-badge">RSVP TRACKER</span>
+  </div>
+
+  <div class="guest-stats">
+
+    <div class="guest-stat">
+      <span>Total Guests</span>
+      <strong id="totalGuests">0</strong>
+    </div>
+
+    <div class="guest-stat">
+      <span>Accepted</span>
+      <strong id="acceptedGuests">0</strong>
+    </div>
+
+    <div class="guest-stat">
+      <span>Pending</span>
+      <strong id="pendingGuests">0</strong>
+    </div>
+
+    <div class="guest-stat">
+      <span>Declined</span>
+      <strong id="declinedGuests">0</strong>
+    </div>
+
+  </div>
+
+  <form id="guestForm" class="guest-form">
+
+    <input
+      type="text"
+      id="guestName"
+      placeholder="Guest name"
+      maxlength="60"
+      required
+    >
+
+    <input
+      type="email"
+      id="guestEmail"
+      placeholder="Guest email"
+      maxlength="100"
+      required
+    >
+
+    <button type="submit">+ Add Guest</button>
+
+  </form>
+
+  <div class="guest-toolbar">
+    <h3>Guest List</h3>
+
+    <select id="guestFilter">
+      <option value="All">All Guests</option>
+      <option value="Accepted">Accepted</option>
+      <option value="Pending">Pending</option>
+      <option value="Declined">Declined</option>
+    </select>
+  </div>
+
+  <div id="guestList" class="guest-list">
+    <p>No guests added yet.</p>
+  </div>
+
+</section>
+<!-- ADVANCED BUDGET ANALYTICS -->
+
+<section class="budget-manager">
+
+  <div class="budget-heading">
+    <div>
+      <p class="eyebrow">FINANCIAL CONTROL</p>
+      <h2>Budget & Expense Analytics</h2>
+      <p>Track every rupee spent on your event.</p>
+    </div>
+    <span class="event-badge">SMART FINANCE</span>
+  </div>
+
+  <form id="budgetForm" class="budget-form">
+    <div>
+      <label for="eventBudget">Set Event Budget (₹)</label>
+      <input
+        type="number"
+        id="eventBudget"
+        min="1"
+        step="1"
+        placeholder="Enter total budget"
+        required
+      >
+    </div>
+    <button type="submit">Save Budget</button>
+  </form>
+
+  <div class="budget-stats">
+
+    <div class="budget-stat">
+      <span>Total Budget</span>
+      <strong id="totalBudget">₹0</strong>
+    </div>
+
+    <div class="budget-stat">
+      <span>Total Spent</span>
+      <strong id="totalSpent">₹0</strong>
+    </div>
+
+    <div class="budget-stat">
+      <span>Remaining</span>
+      <strong id="remainingBudget">₹0</strong>
+    </div>
+
+  </div>
+
+  <div class="budget-progress-section">
+    <div class="budget-progress-heading">
+      <strong>Budget Utilization</strong>
+      <span id="budgetPercentage">0%</span>
+    </div>
+
+    <div class="budget-progress-track">
+      <div id="budgetProgressBar"></div>
+    </div>
+
+    <p id="budgetMessage">Set a budget to begin tracking.</p>
+  </div>
+
+  <div class="expense-section">
+    <h3>Add New Expense</h3>
+
+    <form id="expenseForm" class="expense-form">
+
+      <input
+        type="text"
+        id="expenseName"
+        placeholder="Expense description"
+        maxlength="60"
+        required
+      >
+
+      <select id="expenseCategory" required>
+        <option value="Food">Food & Catering</option>
+        <option value="Decoration">Decoration</option>
+        <option value="Venue">Venue</option>
+        <option value="Travel">Travel</option>
+        <option value="Entertainment">Entertainment</option>
+        <option value="Photography">Photography</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <input
+        type="number"
+        id="expenseAmount"
+        placeholder="Amount (₹)"
+        min="1"
+        step="0.01"
+        required
+      >
+
+      <button type="submit">+ Add Expense</button>
+
+    </form>
+  </div>
+
+  <div class="expense-analytics">
+    <h3>Category-wise Spending</h3>
+    <div id="categoryAnalytics"></div>
+  </div>
+
+  <div class="expense-history">
+    <h3>Expense History</h3>
+    <div id="expenseList"></div>
+  </div>
+
+</section>
+
+<!-- SMART EVENT DAY TIMELINE -->
+<section class="timeline-manager">
+
+  <div class="timeline-heading">
+    <div>
+      <h2>Event Day Timeline</h2>
+      <p>Plan every moment of your special day.</p>
+    </div>
+    <span id="timelineCount">0 Activities</span>
+  </div>
+
+  <form id="timelineForm" class="timeline-form">
+
+    <div>
+      <label for="timelineTime">Time</label>
+      <input type="time" id="timelineTime" required>
+    </div>
+
+    <div>
+      <label for="timelineActivity">Activity</label>
+      <input
+        type="text"
+        id="timelineActivity"
+        placeholder="e.g. Guest arrival"
+        required
+      >
+    </div>
+
+    <div>
+      <label for="timelinePerson">Responsible Person</label>
+      <input
+        type="text"
+        id="timelinePerson"
+        placeholder="e.g. Event manager"
+      >
+    </div>
+
+    <div>
+      <label for="timelineLocation">Location</label>
+      <input
+        type="text"
+        id="timelineLocation"
+        placeholder="e.g. Main hall"
+      >
+    </div>
+
+    <button type="submit">+ Add Activity</button>
+  </form>
+
+  <div class="timeline-progress">
+    <div class="timeline-progress-heading">
+      <strong>Event Progress</strong>
+      <span id="timelineProgressText">0% completed</span>
+    </div>
+    <div class="timeline-progress-track">
+      <div id="timelineProgressBar"></div>
+    </div>
+  </div>
+
+  <div id="timelineList" class="timeline-list">
+    <p class="timeline-empty">No activities planned yet.</p>
+  </div>
+
+</section>
+
+<!-- SMART EVENT ANALYTICS -->
+<section class="analytics-manager">
+
+  <div class="analytics-heading">
+    <div>
+      <h2>Smart Event Analytics</h2>
+      <p>Your complete event performance at a glance.</p>
+    </div>
+    <span class="analytics-live">LIVE ANALYTICS</span>
+  </div>
+
+  <div class="analytics-grid">
+
+    <div class="analytics-card">
+      <span>Task Completion</span>
+      <strong id="analyticsTasks">0%</strong>
+      <small id="analyticsTaskInfo">0 of 0 tasks completed</small>
+    </div>
+
+    <div class="analytics-card">
+      <span>Guest Acceptance</span>
+      <strong id="analyticsGuests">0%</strong>
+      <small id="analyticsGuestInfo">0 accepted guests</small>
+    </div>
+
+    <div class="analytics-card">
+      <span>Budget Utilization</span>
+      <strong id="analyticsBudget">0%</strong>
+      <small id="analyticsBudgetInfo">No expenses recorded</small>
+    </div>
+
+    <div class="analytics-card">
+      <span>Timeline Completion</span>
+      <strong id="analyticsTimeline">0%</strong>
+      <small id="analyticsTimelineInfo">0 of 0 activities completed</small>
+    </div>
+
+<!-- EVENT REPORT EXPORT CENTER -->
+<section class="report-manager">
+
+  <div class="report-heading">
+    <div>
+      <h2>Event Report Center</h2>
+      <p>Generate and export your event performance report.</p>
+    </div>
+    <span class="report-badge">REPORTS</span>
+  </div>
+
+  <div class="report-preview">
+    <div class="report-icon">📊</div>
+    <div>
+      <h3 id="reportEventName">Your Event Report</h3>
+      <p id="reportEventDate">Event summary and performance details</p>
+      <small>Tasks · Guests · Budget · Timeline · Analytics</small>
+    </div>
+  </div>
+
+  <div class="report-buttons">
+    <button type="button" id="exportCSV">
+      ↓ Download CSV Report
+    </button>
+
+    <button type="button" id="printReport">
+      Print / Save as PDF
+    </button>
+  </div>
+
+  <p class="report-note">
+    Your report is generated from the currently selected event.
+  </p>
+
+</section>
+
+<!-- SMART NOTIFICATION CENTER -->
+<section class="notification-manager">
+
+  <div class="notification-heading">
+    <div>
+      <h2>Smart Notifications</h2>
+      <p>Important reminders for your event.</p>
+    </div>
+
+    <span id="notificationCount">0 New</span>
+  </div>
+
+  <div class="notification-toolbar">
+    <select id="notificationFilter">
+      <option value="All">All Notifications</option>
+      <option value="High">High Priority</option>
+      <option value="Medium">Medium Priority</option>
+      <option value="Low">Low Priority</option>
+    </select>
+
+    <button type="button" id="markAllRead">
+      Mark All as Read
+    </button>
+  </div>
+
+  <div id="notificationList" class="notification-list">
+    <p class="notification-empty">
+      No notifications available.
+    </p>
+  </div>
+
+</section>
+
+<!-- SMART EVENT RECOMMENDATIONS -->
+<section class="recommendation-manager">
+
+  <div class="recommendation-heading">
+    <div>
+      <h2>Smart Event Recommendations</h2>
+      <p>Personalized suggestions to improve your event planning.</p>
+    </div>
+    <span>AI Insights</span>
+  </div>
+
+  <div id="recommendationSummary" class="recommendation-summary">
+    Your event insights will appear here.
+  </div>
+
+  <div id="recommendationList" class="recommendation-list">
+    <p>Analyzing your event...</p>
+  </div>
+
+  <button type="button" id="refreshRecommendations">
+    Refresh Recommendations
+  </button>
+
+</section>
+
+
+<!-- FEATURE 11: EVENT CALENDAR -->
+<section class="event-calendar">
+
+  <div class="calendar-heading">
+    <div>
+      <h2>Event Calendar</h2>
+      <p>View and manage your event schedule.</p>
+    </div>
+    <span>Calendar</span>
+  </div>
+
+  <div class="calendar-navigation">
+    <button type="button" id="previousMonth">❮</button>
+    <h3 id="calendarMonth">Month Year</h3>
+    <button type="button" id="nextMonth">❯</button>
+  </div>
+
+  <div class="calendar-weekdays">
+    <span>Sun</span>
+    <span>Mon</span>
+    <span>Tue</span>
+    <span>Wed</span>
+    <span>Thu</span>
+    <span>Fri</span>
+    <span>Sat</span>
+  </div>
+
+  <div id="calendarDays" class="calendar-days"></div>
+
+  <div class="calendar-selection">
+    <h3 id="selectedDateTitle">Select a date</h3>
+    <div id="selectedDateEvents">
+      <p>Choose a calendar date to view events.</p>
+    </div>
+  </div>
+
+  <div class="upcoming-calendar-events">
+    <h3>Upcoming Events</h3>
+    <div id="upcomingCalendarEvents"></div>
+  </div>
+
+</section>
+
+
+<!-- FEATURE 12: ADVANCED EVENT OVERVIEW -->
+<section class="advanced-overview">
+
+  <div class="overview-heading">
+    <div>
+      <h2>Event Command Center</h2>
+      <p>Your complete event preparation overview.</p>
+    </div>
+    <span>Live Overview</span>
+  </div>
+
+  <div class="overview-stats">
+
+    <div class="overview-stat">
+      <span>Total Events</span>
+      <h3 id="overviewTotalEvents">0</h3>
+    </div>
+
+    <div class="overview-stat">
+      <span>Completed Tasks</span>
+      <h3 id="overviewCompletedTasks">0</h3>
+    </div>
+
+    <div class="overview-stat">
+      <span>Total Guests</span>
+      <h3 id="overviewTotalGuests">0</h3>
+    </div>
+
+    <div class="overview-stat">
+      <span>Upcoming Events</span>
+      <h3 id="overviewUpcomingEvents">0</h3>
+    </div>
+
+  </div>
+
+  <div class="overview-progress">
+    <h3>Overall Preparation Progress</h3>
+    <div class="overview-progress-track">
+      <div id="overviewProgressBar"></div>
+    </div>
+    <p id="overviewProgressText">0% completed</p>
+  </div>
+
+  <div class="overview-actions">
+    <h3>Quick Navigation</h3>
+
+    <button type="button" data-target="notificationList">
+      Notifications
+    </button>
+
+    <button type="button" data-target="recommendationList">
+      Recommendations
+    </button>
+
+    <button type="button" data-target="calendarDays">
+      Calendar
+    </button>
+
+    <button type="button" data-target="upcomingCalendarEvents">
+      Upcoming Events
+    </button>
+  </div>
+
+</section>
+
+  </div>
+
+  <div class="event-health">
+    <h3>Event Health Report</h3>
+    <div class="health-score">
+      <div>
+        <span>Overall Preparation Score</span>
+        <strong id="eventHealthScore">0%</strong>
+      </div>
+      <div class="health-track">
+        <div id="eventHealthBar"></div>
+      </div>
+    </div>
+    <p id="eventHealthMessage">
+      Complete your event tasks to generate your report.
+    </p>
+  </div>
+
+</section>
+
+
+
+</select>
+
+    <button type="submit">+ Create Event</button>
+  </form>
+
+  <div class="event-switcher">
+    <label for="eventSelect">Currently managing:</label>
+    <select id="eventSelect"></select>
+    <button type="button" id="deleteEvent" class="delete-event">
+      Delete Event
+    </button>
+  </div>
+
+<div class="countdown-panel">
+  <div>
+    <p class="eyebrow">EVENT COUNTDOWN</p>
+    <h3 id="countdownTitle">Your next event</h3>
+    <p id="countdownMessage">Choose an event date to begin.</p>
+  </div>
+
+  <div class="countdown-number">
+    <strong id="countdownDays">--</strong>
+    <span>DAYS LEFT</span>
+  </div>
+</div>
+
+<div class="upcoming-events">
+  <h3>Upcoming Events</h3>
+  <div id="upcomingEventsList"></div>
+</div>
+</section>
+<section class="workspace" id="workspace">
+        <div class="section-heading">
+          <div><p class="eyebrow">YOUR ACTIVITY</p><h2>Your progress, at a glance</h2></div>
+          <span class="date-pill" id="today"></span>
+        </div>
+        <div class="content-grid">
+          <article class="panel task-panel">
+            <div class="panel-heading"><div><p class="eyebrow">DAILY PLAN</p><h3>Today's checklist</h3></div><span class="count" id="count">0/6</span></div>
+            <div class="progress-track"><div class="progress-fill" id="progress"></div></div>
+            <div id="taskList" class="task-list"><label class="task"><input type="checkbox"><span>Choose event date and venue</span></label>
+<label class="task"><input type="checkbox"><span>Prepare guest list</span></label>
+<label class="task"><input type="checkbox"><span>Send invitations</span></label>
+<label class="task"><input type="checkbox"><span>Arrange food and refreshments</span></label>
+<label class="task"><input type="checkbox"><span>Plan decorations</span></label>
+<label class="task"><input type="checkbox"><span>Confirm music and sound</span></label></div>
+            <form id="addForm" class="add-form"><input id="newTask" type="text" maxlength="60" placeholder="Add your own item..." aria-label="New item"><button type="submit" aria-label="Add item">+</button></form>
+          </article>
+          <aside class="panel insight-panel">
+            <p class="eyebrow">LIVE INSIGHT</p><h3>Your progress</h3>
+            <div class="score-wrap"><div class="score-ring" id="scoreRing"><div><strong id="score">0%</strong><small>COMPLETE</small></div></div></div>
+            <p class="insight-text" id="insightText">Start with one small step. Your progress will appear here.</p>
+            <div class="mini-note"><span class="spark">✦</span><span>Event task checklist · Add custom tasks</span></div>
+          </aside>
+        </div>
+      </section>
+      <footer><span>Planova <b>·</b> Built with HTML, CSS & JavaScript</span><span>Made for your next idea ↗</span></footer>
+    </main>
+  </div>
+  <script src="script.js"></script>
+
+<!-- FEATURE 13: PLANOVA AI ASSISTANT -->
+
+<button id="planovaChatToggle" class="planova-chat-toggle">
+  ✦
+</button>
+
+<div id="planovaChatWindow" class="planova-chat-window">
+
+  <div class="planova-chat-header">
+    <div>
+      <h3>✦ Planova AI</h3>
+      <p>Your smart event planning assistant</p>
+    </div>
+
+    <button id="planovaChatClose" type="button">×</button>
+  </div>
+
+  <div id="planovaChatMessages" class="planova-chat-messages">
+    <div class="planova-message bot">
+      Hey! Welcome to Planova. 💜
+      <br><br>
+      I'm your AI event planning assistant.
+      How can I help you today?
+    </div>
+  </div>
+
+  <div class="planova-chat-suggestions">
+    <button type="button" data-prompt="Suggest event decoration ideas">
+      Decoration Ideas
+    </button>
+
+    <button type="button" data-prompt="How can I reduce my event budget?">
+      Budget Tips
+    </button>
+
+    <button type="button" data-prompt="Help me plan my event">
+      Plan My Event
+    </button>
+  </div>
+
+  <form id="planovaChatForm" class="planova-chat-input">
+    <input
+      type="text"
+      id="planovaChatInput"
+      placeholder="Ask Planova anything..."
+      autocomplete="off"
+      required
+    >
+
+    <button type="submit">➤</button>
+  </form>
+
+</div>
+</body>
+</html>
